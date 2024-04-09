@@ -9,17 +9,20 @@ export const AddContact = () => {
 	const [address, setAddress] = useState("");
 	const { store, actions } = useContext(Context);
 
-	function bodyAñadirContacto(e) {
+	function bodyAddContact(e) {
 		e.preventDefault();
-		actions.creacionContacto(fullName, email, address, phone);
-		// console.log("hola");
+		actions.createContact(fullName, email, address, phone);
+		setFullName("");
+		setEmail("");
+		setPhone("");
+		setAddress("");
 	}
 
 	return (
 		<div className="container">
 			<div>
 				<h1 className="text-center mt-5">Add a new contact</h1>
-				<form onSubmit={bodyAñadirContacto}>
+				<form onSubmit={bodyAddContact}>
 					<div className="form-group">
 						<label>Full Name</label>
 						<input

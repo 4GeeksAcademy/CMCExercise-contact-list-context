@@ -16,7 +16,7 @@ export const Contacts = () => {
 	};
 
 	useEffect(() => {
-		actions.getDatosAgenda();
+		actions.getAgendaData();
 	}, []);
 
 	return (

@@ -6,8 +6,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			//(Arrow) Functions that update the Store
-			getDatosAgenda: function() {
-				fetch("https://playground.4geeks.com/apis/fake/contact/agenda/Ramiro")
+			getAgendaData: function() {
+				fetch("https://playground.4geeks.com/contact/")
 					.then(resp => {
 						console.log(resp);
 						console.log(resp.status);
@@ -19,16 +19,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.catch(error => console.log(error));
 			},
-			creacionContacto: function(fullName, email, address, phone) {
-				fetch("https://playground.4geeks.com/apis/fake/contact", {
+			createContact: function(fullName, email, address, phone) {
+				fetch("https://playground.4geeks.com/contact/", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
-						full_name: fullName,
+						name: fullName,
 						email: email,
-						agenda_slug: "Ramiro",
 						address: address,
 						phone: phone
 					})
@@ -42,6 +41,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data);
 					})
 					.catch(error => console.log(error));
+			},
+			deleteData: function() {
+				const response = fetch("https://playground.4geeks.com/contact/", {
+					method: "DELETE"
+				});
+				if (response.ok) {
+					const data = response.json();
+					return data;
+				} else {
+					console.log("error: ", response.status, response.statusText);
+					/* Handle the error returned by the HTTP request */
+					return { error: { status: response.status, statusText: response.statusText } };
+				}
 			}
 		}
 	};
